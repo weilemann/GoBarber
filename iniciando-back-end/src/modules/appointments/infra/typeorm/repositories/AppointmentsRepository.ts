@@ -19,6 +19,8 @@ class AppointmentsRepository implements IAppointmentsRepository {
       where: { date },
     });
 
+    console.log(findAppointment);
+
     return findAppointment;
   }
 
