@@ -51,21 +51,17 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const signIn = useCallback(async ({ email, password }) => {
     try {
-      console.log(`Entrei no método sign in, hein? ${email}`);
-      // Tá parando aqui!
       const response = await api.post('/sessions', {
         email,
         password,
       });
 
       const { token, user } = response.data;
-      console.log(`Até aqui tudo bem! ${email}`);
 
       await AsyncStorage.multiSet([
         ['@GoBarber:token', token],
         ['@GoBarber:user', JSON.stringify(user)],
       ]);
-      console.log(`Consegui o token!! ${token}`);
 
       setData({ token, user });
     } catch (err) {

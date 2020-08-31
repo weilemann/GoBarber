@@ -61,12 +61,10 @@ const SignIn: React.FC = () => {
       await schema.validate(data, {
         abortEarly: false,
       });
-      console.log(`Chegou até aqui!! ${data.email} ${data.password}`);
       await signIn({
         email: data.email,
         password: data.password,
       });
-      console.log(`Se chegou até aqui é gg! ${data.email}`);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
