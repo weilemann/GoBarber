@@ -1,69 +1,71 @@
-# Recuperação de senha
+<h1 align="center">
+  <img alt="Logo" src="https://res.cloudinary.com/eliasgcf/image/upload/v1588625369/GoBarber/logo_iw1v9f.svg" width="200px">
+</h1>
 
-**RF (Requisitos Funcionais)**
+## 📃 About the project
 
-- O usuário deve poder recuperar sua senha informando o seu e-mail;
-- O usuário deve receber um e-mail com instruções de recuperação de senha;
-- O usuário deve poder resetar sua senha;
+This api provides all the necessary methods for appointments scheduling between barbers and customers.
 
-**RNF (Requisitos Não-Funcionais)**
+Customers can choose the best time available to them.
 
-- Utilizar Mailtrap para testar envios em ambiente de dev;
-- Utilizar Amazon SES para envios em produção;
-- O envio de e-mails deve acontecer em segundo plano (background job);
+Providers can see all their appointments, manage the times, also see if one client canceled the schedule.
 
-**RN (Regras de Negócio)**
+To see the **web client**, click here: [GoBarber Web](https://github.com/weilemann/GoBarber/tree/master/06-gobarber-web)<br />
+To see the **mobile client**, click here: [GoBarber Mobile](https://github.com/weilemann/GoBarber/tree/master/appgobarber)
 
-- O link enviado por e-mail para resetar senha deve expirar em 2h;
-- O usuário precisa confirmar a nova senha ao resetar sua senha;
+## 💻 Technologies
 
-# Atualização do serfil
+- [Node.js](https://nodejs.org/en/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Express](https://expressjs.com/pt-br/)
+- [Multer](https://github.com/expressjs/multer)
+- [TypeORM](https://typeorm.io/#/)
+- [JWT-token](https://jwt.io/)
+- [uuid v4](https://github.com/thenativeweb/uuidv4/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Date-fns](https://date-fns.org/)
+- [Jest](https://jestjs.io/)
+- [Eslint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [EditorConfig](https://editorconfig.org/)
 
-**RF (Requisitos Funcionais)**
+### Requirements
 
-- O usuário deve poder atualizar seu nome, e-mail e senha;
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
+- One instance of [PostgreSQL](https://www.postgresql.org/)
 
-**RN (Regras de Negócio)**
+**Follow the steps below**
 
-- O usuário não pode alterar seu e-mail para um e-mail já utilizado;
-- Para atualizar sua senha, o usuário deve informar a senha antiga;
-- Para atualizar sua senha, o usuário precisa confirmar a nova senha;
+```bash
+# Install the dependencies
+$ yarn
 
-# Painel do prestador
+# Make a copy of '.env.example' to '.env'
+# and set with YOUR environment variables.
+# The aws variables do not need to be filled for dev environment
+$ cp .env.example .env
 
-**RF (Requisitos Funcionais)**
+# Create the instance of postgreSQL using docker
+$ docker run --name gobarber-postgres -e POSTGRES_USER=docker \
+              -e POSTGRES_DB=gobarber -e POSTGRES_PASSWORD=docker \
+              -p 5432:5432 -d postgres
 
-- O usuário deve poder listar seus agendamentos de um dia específico;
-- O prestador deve receber uma notificação sempre que houver um novo agendamento;
-- O prestador deve poder visualizar as notificações não lidas;
+# Create the instance of mongoDB using docker
+$ docker run --name gobarber-mongodb -p 27017:27017 -d -t mongo
 
-**RNF (Requisitos Não-Funcionais)**
+# Create the instance of redis using docker
+$ docker run --name gobarber-redis -p 6379:6379 -d -t redis:alpine
 
-- Os agendamentos do prestador no dia devem ser armazenados em cache;
-- As notificações do prestador devem ser armazenadas no MongoDB;
-- As notificações do prestador devem ser enviadas em tempo real utilizando Socket.io;
+# Once the services are running, run the migrations
+$ yarn typeorm migration:run
 
-**RN (Regras de Negócio)**
+# To finish, run the api service
+$ yarn dev:server
+```
 
-- A notificação deve ter um status de lida ou não lida para que o prestador possa controlar;
+## 📝 License
 
-# Agendamento de serviços
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-**RF (Requisitos Funcionais)**
-
-- O usuário deve poder listar todos os prestadores de serviço cadastrados;
-- O usuário deve poder listar os dias de um mês com pelo menos um horário disponível de um prestador;
-- O usuário deve poder listar horários disponíveis em um dia específico de um prestador;
-- O usuário deve poder realizar um novo agendamento com um prestador;
-
-**RNF (Requisitos Não-Funcionais)**
-
-- A listagem de prestadores deve ser armazenado em cache;
-
-**RN (Regras de Negócio)**
-
-- Cada agendamento deve durar exatamente 1h;
-- Os agendamentos devem estar disponíveis entre 8h e 18h (Primeiro às 8h, último às 17h);
-- O usuário não pode agendar em um horário já ocupado;
-- O usuário não pode agendar em um horário que já passou;
-- O usuário não pode agendar serviços consigo mesmo;
+---
