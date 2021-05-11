@@ -17,7 +17,7 @@
     "axios": "^0.19.2",
     "date-fns": "^2.15.0",
     "elliptic": "^6.5.3",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "polished": "^3.6.5",
     "react": "^16.13.1",
     "react-day-picker": "^7.4.8",
